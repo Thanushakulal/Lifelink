@@ -70,10 +70,14 @@ export default function MapSearch({ onSelect }: { onSelect?: (h: HospitalLite) =
     init()
 
     return () => {
-      // Cleanup
-      if (userMarker) userMarker.setMap(null)
-      map = null
-    }
+  // Cleanup
+  if (userMarker instanceof google.maps.Marker) {
+    userMarker.setMap(null)
+  }
+  userMarker = null
+  map = null
+}
+
   }, [radiusKm])
 
   const handleSelect = (place: google.maps.places.PlaceResult, map?: google.maps.Map) => {
